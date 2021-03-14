@@ -131,8 +131,68 @@ all(colSums(is.na(file1)) == 0)
 table(file1$zipcode == "21212")
 table(file1$zipcode %in% c("21212"))
 
+# Find multiple criteria in a dataset
+
 table(file1$zipcode %in% c("21212","21213"))
 
-
+#extract data from dataset - value with specific character
 file1[file1$zipcode %in% c("21212","21213"),]
-z
+
+#Creating a dataframe of a dataset and getting summary
+data("UCBAdmissions")
+DF = as.data.frame(UCBAdmissions)
+summary(DF)
+
+#Identify the relationship in the dataset
+#left side is what variable we want to display in the table (freq) with broken down by gender and admit 
+xt <- xtabs(Freq ~ Gender + Admit,data = DF)
+
+#Flattable
+#break into multiple vaiable # breaks down the dataset by all the variabls
+warpbreaks$replicate <-rep(1:9, len = 54)
+xt = xtabs(breaks ~., data = warpbreaks)
+xt
+
+# creates a flat 2 dimensonianl table by taking the cross tab
+ftable(xt)
+
+#check size of data #using bbject size command
+FakeData =rnorm(1e5)
+object.size(FakeData)
+
+print(object.size(FakeData),units = "MB")
+
+#extract value from a dataset and show in a table # subsetting variable
+file1$nearMe = file1$nghbrhd %in% c("Roland Park","Homeland")
+table(file1$nearMe)
+
+#binary variable
+restwrong =ifelse(file1$zipcode <0,TRUE,FALSE)
+table(restwrong,file1$zipcode <0)
+
+#Creating catagorical variable
+file1$zipGrp = cut(file1$zipcode,breaks = quantile(file1$zipcode))
+table(restData)
+
+table(restData, restData)
+
+# segregating in group using #Hmisc package
+zipcode = cut2(file1$zipcode, g=4)
+table(zipcode)
+
+# creating factor variable
+
+
+Zipinfactr <- factor(file1$zipcode)
+Zipinfactr[1:10]
+
+#create a factor variable
+#1st create a data
+data4factor <- sample(c("yes","no"),size = 10,replace = T)
+#convert it to factor assign level by using levels or else automatically lowest value numeric will be 1st level
+createfactor <- factor(data4factor,levels = c("yes","no"))
+#relevel the variable
+relevel(createfactor,ref = "yes")
+# convert to numeric
+factor2num <- as.numeric(createfactor)
+
